@@ -39,7 +39,7 @@ fetch(website_1_RequestURL)
 
 function processTeamSelected() {
     // console.log("inside function processTeamSelected");
-    teamSelected = $("#team-names option:selected").text()
+    var teamSelected = $("#team-names option:selected").text();
     console.log("teamSelected:", teamSelected);
 }
 
