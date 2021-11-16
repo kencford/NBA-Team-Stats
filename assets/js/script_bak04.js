@@ -1,12 +1,10 @@
 console.log('Javascript starts here');
 
 var website_1_RequestURL = "https://www.balldontlie.io/api/v1/teams";
-var website_2_RequestURL = "https://api.sportsdata.io/v3/nfl/scores/json/TeamSeasonStats/2021REG?key=3f4dc0ef76a245e2bae1174886de1276";
 
 
 var website_01_Response = {};
 var numTeams = 0;
-var teamSelected = ""
 var selectEl = document.getElementById("team-names");
 
 //need to add this within html
@@ -41,7 +39,7 @@ fetch(website_1_RequestURL)
 
 function processTeamSelected() {
     // console.log("inside function processTeamSelected");
-    teamSelected = $("#team-names option:selected").text();
+    var teamSelected = $("#team-names option:selected").text();
     console.log("teamSelected:", teamSelected);
 }
 
@@ -52,4 +50,4 @@ document.getElementById("team-names").addEventListener("change", processTeamSele
 // $("#team-names").change(processTeamSelected());
 
 
-//displayTeamStats
+
