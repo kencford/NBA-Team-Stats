@@ -24,33 +24,27 @@ fetch(website_1_RequestURL)
         for (var i = 0; i < numTeams; i++) {
             // console.log(data["data"][i]["full_name"]);
             var optionEl = document.createElement("option");
-            var dataElement = data["data"][i]["full_name"]
+            var dataElement = data["data"][i]["full_name"];
+            //======================================================
+            // Need to change name of 'LA Clippers' to 'Los Angeles Clippers'
+            // All other names on both websites agree
+            //======================================================
+            if (dataElement === 'LA Clippers') {
+                dataElement = 'Los Angeles Clippers';
+            }
 
             optionEl.setAttribute("value", dataElement);
             optionEl.textContent = dataElement;
 
             // console.log(optionEl);
 
-            //===============================================================
-            // Bug: if first item in team selected in the dropdown is first
-            // team listed - then nothing happens
-            // Somehow we need to have initial text id display box something 
-            // other than the first team - something like "Select team"
-            //================================================================
-
             // appending dropdown menu for team selection
             selectEl.append(optionEl);
         }
-        // console.log()
-
-        //not successful in getting this outside "fetch"
-        // website_01_Response = data;
     });
 
-
-
 function processTeamSelected() {
-    // console.log("inside function processTeamSelected");
+    console.log("inside function processTeamSelected");
     teamSelected = $("#team-names option:selected").text();
     // console.log("teamSelected:", teamSelected);
 
@@ -66,13 +60,6 @@ function processTeamSelected() {
             numTeams = data.length;
             // console.log("numTeams ", numTeams);
             // console.log(data);
-
-            //============================================================
-            // Bug **maybe** : If names are not always identical between 2 websites
-            // (which Ken is still checking)
-            // Then Ken will do a lookup translation
-            // It appears that *most* are in agreement
-            //============================================================
 
             for (i = 0; i < numTeams; i++) {
                 // console.log(data[i]["Name"]);
@@ -94,6 +81,7 @@ function displayTeamStats() {
     console.log("teamSelected", teamSelected);
     console.log("teamStats:");
     console.log(teamStats);
+    return;
 }
 
 document.getElementById("team-names").addEventListener("change", processTeamSelected);
