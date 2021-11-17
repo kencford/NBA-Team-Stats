@@ -81,14 +81,28 @@ function displayTeamStats() {
     console.log("teamSelected", teamSelected);
     console.log("teamStats:");
     console.log(teamStats);
+    
+    var teamPoints = teamStats.Points;
+    var footer = document.querySelector(".footer");
+
+    var winsEl = document.createElement('p');
+    winsEl.textContent = "Team's total wins: " + teamStats.Wins;
+    console.log(winsEl);
+    footer.appendChild(winsEl);
+
+    var winsEl = document.createElement('p');
+    winsEl.textContent = "Team's total losses: " + teamStats.Losses;
+    console.log(winsEl);
+    footer.appendChild(winsEl);
+
+    var winsEl = document.createElement('p');
+    winsEl.textContent = "Team's total points: " + teamStats.Points;
+    console.log(winsEl);
+    footer.appendChild(winsEl);
+
     return;
+
 }
 
 document.getElementById("team-names").addEventListener("change", processTeamSelected);
 
-//this got triggered with initial screen display rather
-// than when team is selected. Used alternative shown above
-// $("#team-names").change(processTeamSelected());
-
-
-//displayTeamStats
