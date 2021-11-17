@@ -84,7 +84,11 @@ function displayTeamStats() {
     
     var teamPoints = teamStats.Points;
     var footer = document.querySelector(".footer");
-
+    var stats = footer.querySelectorAll("p")
+    stats.forEach(function(stat){
+        stat.remove()
+        console.log(stat)
+    })
     var winsEl = document.createElement('p');
     winsEl.textContent = "Team's total wins: " + teamStats.Wins;
     console.log(winsEl);
@@ -100,9 +104,8 @@ function displayTeamStats() {
     console.log(winsEl);
     footer.appendChild(winsEl);
 
-    return;
-
 }
+
 
 document.getElementById("team-names").addEventListener("change", processTeamSelected);
 
