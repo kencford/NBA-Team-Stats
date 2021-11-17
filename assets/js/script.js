@@ -85,27 +85,28 @@ function displayTeamStats() {
     
     var teamPoints = teamStats.Points;
     var footer = document.querySelector(".footer");
+    var stats = footer.querySelectorAll("p")
+    stats.forEach(function(stat){
+        stat.remove()
+        console.log(stat)
+    })
+    var winsEl = document.createElement('p');
+    winsEl.textContent = "Team's total wins: " + teamStats.Wins;
+    console.log(winsEl);
+    footer.appendChild(winsEl);
 
-    var statsAppendEl = document.createElement('p');
-    statsAppendEl.textContent = "Team's total wins: " + teamStats.Wins;
-    console.log(statsAppendEl);
-    footer.appendChild(statsAppendEl);
+    var winsEl = document.createElement('p');
+    winsEl.textContent = "Team's total losses: " + teamStats.Losses;
+    console.log(winsEl);
+    footer.appendChild(winsEl);
 
-    // simple to keep same name for element; just need to reinitialize it
-    // so it doesn't replace the one above
-    var statsAppendEl = document.createElement('p');
-    statsAppendEl.textContent = "Team's total losses: " + teamStats.Losses;
-    console.log(statsAppendEl);
-    footer.appendChild(statsAppendEl);
-
-    var statsAppendEl = document.createElement('p');
-    statsAppendEl.textContent = "Team's total points: " + teamStats.Points;
-    console.log(statsAppendEl);
-    footer.appendChild(statsAppendEl);
-
-    return;
+    var winsEl = document.createElement('p');
+    winsEl.textContent = "Team's total points: " + teamStats.Points;
+    console.log(winsEl);
+    footer.appendChild(winsEl);
 
 }
+
 
 document.getElementById("team-names").addEventListener("change", processTeamSelected);
 
