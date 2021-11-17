@@ -20,6 +20,7 @@ fetch(website_1_RequestURL)
         // console.log(data);
         // console.log("data section: ", data["data"]);
         // console.log(data["data"]["length"]);
+        document.createElement("option" placeholder='Select team');
         numTeams = data["data"]["length"];
         for (var i = 0; i < numTeams; i++) {
             // console.log(data["data"][i]["full_name"]);
@@ -85,20 +86,22 @@ function displayTeamStats() {
     var teamPoints = teamStats.Points;
     var footer = document.querySelector(".footer");
 
-    var winsEl = document.createElement('p');
-    winsEl.textContent = "Team's total wins: " + teamStats.Wins;
-    console.log(winsEl);
-    footer.appendChild(winsEl);
+    var statsAppendEl = document.createElement('p');
+    statsAppendEl.textContent = "Team's total wins: " + teamStats.Wins;
+    console.log(statsAppendEl);
+    footer.appendChild(statsAppendEl);
 
-    var winsEl = document.createElement('p');
-    winsEl.textContent = "Team's total losses: " + teamStats.Losses;
-    console.log(winsEl);
-    footer.appendChild(winsEl);
+    // simple to keep same name for element; just need to reinitialize it
+    // so it doesn't replace the one above
+    var statsAppendEl = document.createElement('p');
+    statsAppendEl.textContent = "Team's total losses: " + teamStats.Losses;
+    console.log(statsAppendEl);
+    footer.appendChild(statsAppendEl);
 
-    var winsEl = document.createElement('p');
-    winsEl.textContent = "Team's total points: " + teamStats.Points;
-    console.log(winsEl);
-    footer.appendChild(winsEl);
+    var statsAppendEl = document.createElement('p');
+    statsAppendEl.textContent = "Team's total points: " + teamStats.Points;
+    console.log(statsAppendEl);
+    footer.appendChild(statsAppendEl);
 
     return;
 
