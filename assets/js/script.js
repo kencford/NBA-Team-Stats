@@ -9,7 +9,88 @@ var teamSelected = ""
 var teamStats = {};
 var selectEl = document.getElementById("team-names");
 
+var teamsSelected = [];
+var teamsChosen = document.querySelector("#teamsChosen");
+
 //need to add this within html
+
+//==========================================
+//local storage
+
+//==========================================
+
+//This function is being called below and will run when the page loads.
+function init() {
+  // Get stored teamsSelected from localStorage
+
+
+  var storedTeams = JSON.parse(localStorage.getItem("teamsSelected"));
+
+  // If teamsSelected were retrieved from localStorage, update the teamsSelected array to it
+  if (storedTeams !== null) {
+    teamsSelected = storedTeams;
+  }
+  console.log(teamsSelected);
+  // This is a helper function that will render teamsSelected to the DOM
+  renderTeamsSelected();
+}
+
+  
+  function storeTeamsSelected() {
+    // Stringify and set key in localStorage to teamsSelected array
+    localStorage.setItem("teamsSelected", JSON.stringify(teamsSelected));
+  }
+
+  function renderTeamsSelected() {
+      console.log(teamsSelected);
+  }
+  
+  // Add submit event to form
+  teamsChosen.addEventListener("submit", function(event) {
+    event.preventDefault();
+  
+    var teamsInputText = todoInput.value.trim();
+  
+    // Return from function early if submitted todoText is blank
+    if (teamsInputText === "") {
+      return;
+    }
+  
+    // Add new todoText to teamsSelected array, clear the input
+    teamsSelected.push(todoText);
+    teamsInput.value = "";
+  
+    // Store updated teamsSelected in localStorage, re-render the list
+    storeTeamsSelected();
+    renderTeamsSelected();
+  });
+  
+  // Add click event to todoList element
+  todoList.addEventListener("click", function(event) {
+    var element = event.target;
+  
+    // Checks if element is a button
+    if (element.matches("button") === true) {
+      // Get its data-index value and remove the todo element from the list
+      var index = element.parentElement.getAttribute("data-index");
+      teamsSelected.splice(index, 1);
+  
+      // Store updated teamsSelected in localStorage, re-render the list
+      storeTeamsSelected();
+      renderTeamsSelected();
+    }
+  });
+  
+  // Calls init to retrieve data and render it to the page on load
+  init()
+  
+
+  //==========================================
+//end local storage
+
+//==========================================
+
+
 
 fetch(website_1_RequestURL)
     .then(function (response) {
@@ -20,7 +101,6 @@ fetch(website_1_RequestURL)
         // console.log(data);
         // console.log("data section: ", data["data"]);
         // console.log(data["data"]["length"]);
-        document.createElement("option" placeholder='Select team');
         numTeams = data["data"]["length"];
         for (var i = 0; i < numTeams; i++) {
             // console.log(data["data"][i]["full_name"]);
@@ -38,8 +118,14 @@ fetch(website_1_RequestURL)
             optionEl.textContent = dataElement;
 
             // console.log(optionEl);
-
+            var selectPlaceholder = document.createElement("option");
+            selectPlaceholder.setAttribute("disabled", true);
+            selectPlaceholder.setAttribute("selected", true);
+            selectPlaceholder.setAttribute("hidden", true);
+            selectPlaceholder.textContent = "Choose Team";
+            
             // appending dropdown menu for team selection
+            selectEl.append(selectPlaceholder);
             selectEl.append(optionEl);
         }
     });
@@ -86,6 +172,7 @@ function displayTeamStats() {
     var teamPoints = teamStats.Points;
     var footer = document.querySelector(".footer");
     var stats = footer.querySelectorAll("p")
+    
     stats.forEach(function(stat){
         stat.remove()
         console.log(stat)
