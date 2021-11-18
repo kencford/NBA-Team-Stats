@@ -1,6 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <title>NBA Team Stats</title>
+    <style>
+        img{
+    width: 320px;
+    height: 200px;
+    position: absolute;
+}
+.container{
+    width: 350px;
+    height: 200px;
+    position: relative;
+    margin-top: 15%;
+    margin-left: 40%
+    perspective 1000px;
+    transform-style: preserve-3d;
+    transform: rotateX(-10deg) rotateZ(-10deg);
+    animation: rotate 20s linear infinite;
+}
+@keyframes ror{
+    50%{
+        transform: rotateX(30deg);
+    }
+    80%{
+        transform: rotateX(-30deg);
+    }
+}
+.images{
+    width: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    animation: rotate 30s linear infinite;
+}
+@keyframes rotate{
+    from{
+
+    }
+ to{
+    transform: rotateY(360deg);}
+}
+img:nth-child(1) {
+    transform: rotateY(60deg) translateZ(300px);
+}
+img:nth-child(2) {
+    transform: rotateY(120deg) translateZ(300px);
+}
+img:nth-child(3) {
+    transform: rotateY(180deg) translateZ(300px);
+}
+img:nth-child(4) {
+    transform: rotateY(240deg) translateZ(300px);
+}
+img:nth-child(5) {
+    transform: rotateY(300deg) translateZ(300px);
+}
+img:nth-child(6) {
+    transform: rotateY(360deg) translateZ(300px);
+}
+img:hover{
+    width: 340px;
+    height: 220px;
+    cursor: pointer
+}
+    </style>
+  </head>
+
+  <body>
+
+    <nav class="navbar has-background-dark" role="navigation" aria-label="main navigation" >
+        <div class="navbar-brand">
+          <a class="navbar-item">
+            <img src="https://c4.wallpaperflare.com/wallpaper/661/973/110/cool-nba-logo-wallpaper-preview.jpg" width="80" height="58" alt="NBA logo">
+          </a>
+          <h1 class="navbar button is-rounded is-info mr-4">
+            Home
+          </h1>
+          <h1 class="navbar button is-rounded is-info mr-4">
+            About Us
+          </h1>
+          <h1 class="navbar button is-rounded is-info mr-4">
+            Place Holder
+          </h1>
+          </div>
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="button is-danger" href="signupindex.html">
+                  <strong>Sign up</strong>
+                </a>
+                <a class="button is-light" href="loginindex.html">
+                  Log in
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <section>
+        <section class ="container">
+            <div class ="images">
+                <img src="https://s.yimg.com/ny/api/res/1.2/Zh4Wn333.cA0yD3TSD5KCQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM2MA--/https://s.yimg.com/uu/api/res/1.2/dsyMPhcXPkMDMoHhOUELiQ--~B/aD01NzY7dz0xMDI0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/sny_articles_235/3f77fd70d0d6643cc698ee6f1736271a">
+                <img src="https://cdn.nba.com/manage/2021/07/bucks-champions-finals-hub.jpg">
+                <img src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2019%2F04%2F1-2.jpg?w=960&cbr=1&q=90&fit=max">
+                <img src="https://pbs.twimg.com/profile_images/1246596955893116928/3j-4Wsct_400x400.jpg">
+                <img src="https://cdn.nba.com/manage/2021/06/1920x1080_KIA_MVP_Jokic_FINAL.jpg">
+                <img src="https://www.desktopbackground.org/download/1680x1050/2010/04/21/5423_stephen-curry-cool-hd-wallpapers-free-wallpapers-page_1772x1181_h.jpg">
+            </div>
+        </section>
+    </section>
+    <footer>
+        <select name="" id="team-names"></select>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="./assets/js/script.js"></script>
+    </footer>
+  </body>
+</html>
+
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,6 +142,8 @@
 
 <body>
     <header>
+        <!-- <select name="" id="team-names"></select> -->
+
         <h1 class="boink">
             <a href="">Teams</a>
             <a href="">About us</a>
@@ -28,9 +158,7 @@
 
     <section>
         <select name="" id="team-names"></select>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="./assets/js/script.js"></script>
-
+       
         <div class="w3-container w3-green">
             <h1>W3Schools Demo</h1>
             <p>Resize this responsive page!</p>
@@ -109,6 +237,8 @@
         </div>
 
     </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="./assets/js/script.js"></script>
 
 </body>
 
