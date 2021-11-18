@@ -49,11 +49,18 @@ fetch(website_1_RequestURL)
             selectEl.append(optionEl);
         }
     });
+    
 
 function processTeamSelected() {
     console.log("inside function processTeamSelected");
+    const storageTeamsRaw = localStorage.getItem("teamSelectedStored");
+    const storageTeams = JSON.parse(storageTeamsRaw);
     teamSelected = $("#team-names option:selected").text();
+    const teams= storageTeams ? [...storageTeams, teamSelected] : [teamSelected];
+    console.log(teams);
+    localStorage.setItem('teamSelectedStored', JSON.stringify(teams));
     // console.log("teamSelected:", teamSelected);
+    
 
     fetch(website_2_RequestURL)
         .then(function (response) {
@@ -113,6 +120,8 @@ function displayTeamStats() {
     footer.appendChild(winsEl);
 
 }
+
+
 
 
 document.getElementById("team-names").addEventListener("change", processTeamSelected);
