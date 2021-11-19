@@ -24,14 +24,16 @@ function renderTeams() {
         var team = teamsSelected[i];
 
         var pEl = document.createElement("p");
-        pEl.textContent = team;
+        //pEl.textContent = team;
         pEl.setAttribute("data-index", i);
 
         var button = document.createElement("button");
-        button.textContent = "Click Me";
+        button.textContent = team;
+        button.setAttribute("data-index", i);
 
         pEl.appendChild(button);
-        teamListEl.appendChild(pEl);
+        teamListEl.appendChild(pEl)
+
     }
 }
 
@@ -160,27 +162,39 @@ function displayTeamStats() {
     console.log(teamStats);
 
     var teamPoints = teamStats.Points;
-    var stats = statListEl.querySelectorAll("p")
+    var stats = statListEl.querySelectorAll("p");
 
     stats.forEach(function (stat) {
         stat.remove();
         console.log(stat);
     })
 
+
+
+    var nameEl = document.createElement('p');
+    nameEl.classList.add("teamStatName");
+    nameEl.textContent = "Team stats for " + teamStats.Name;
+    console.log(nameEl);
+    statListEl.appendChild(nameEl);
+
+
     var winsEl = document.createElement('p');
+    winsEl.classList.add("teamStat");
     winsEl.textContent = "Team's total wins: " + teamStats.Wins;
     console.log(winsEl);
     statListEl.appendChild(winsEl);
 
-    var winsEl = document.createElement('p');
-    winsEl.textContent = "Team's total losses: " + teamStats.Losses;
-    console.log(winsEl);
-    statListEl.appendChild(winsEl);
+    var lossesEl = document.createElement('p');
+    lossesEl.classList.add("teamStat");
+    lossesEl.textContent = "Team's total losses: " + teamStats.Losses;
+    console.log(lossesEl);
+    statListEl.appendChild(lossesEl);
 
-    var winsEl = document.createElement('p');
-    winsEl.textContent = "Team's total points: " + teamStats.Points;
-    console.log(winsEl);
-    statListEl.appendChild(winsEl);
+    var pointsEl = document.createElement('p');
+    pointsEl.classList.add("teamStat");
+    pointsEl.textContent = "Team's total points: " + teamStats.Points;
+    console.log(pointsEl);
+    statListEl.appendChild(pointsEl);
 
 }
 
