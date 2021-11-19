@@ -9,7 +9,64 @@ var teamSelected = ""
 var teamStats = {};
 var selectEl = document.getElementById("team-names");
 
-//need to add this within html
+var teamsSelected = [];
+var teamsChosen = document.querySelector("#teamsChosen");
+var teamListEl = document.querySelector("#team-list");
+var statListEl = document.getElementById("stat-list");
+
+// The following function renders items in a todo list as <li> elements
+function renderTeams() {
+    // Clear todoList element and update todoCountSpan
+    teamListEl.innerHTML = "";
+
+    // Render a new li for each todo
+    for (var i = 0; i < teamsSelected.length; i++) {
+        var team = teamsSelected[i];
+
+        var pEl = document.createElement("p");
+        pEl.textContent = team;
+        pEl.setAttribute("data-index", i);
+
+        var button = document.createElement("button");
+        button.textContent = "Click Me";
+
+        pEl.appendChild(button);
+        teamListEl.appendChild(pEl);
+    }
+}
+
+function getStoredTeams() {
+    var storedTeams = JSON.parse(localStorage.getItem("teamSelectedStored"));
+    // If todos were retrieved from localStorage, update the todos array to it
+    if (storedTeams !== null) {
+        teamsSelected = storedTeams;
+    }
+
+}
+
+
+//==============================
+// adding init
+// This function is being called below and will run when the page loads.
+function init() {
+    // Get stored todos from localStorage
+    getStoredTeams();
+    // This is a helper function that will render todos to the DOM
+    renderTeams();
+}
+
+function storeTeams() {
+    console.log("inside function processTeamSelected");
+    const storageTeamsRaw = localStorage.getItem("teamSelectedStored");
+    const storageTeams = JSON.parse(storageTeamsRaw);
+    teamSelected = $("#team-names option:selected").text();
+    const teams = storageTeams ? [...storageTeams, teamSelected] : [teamSelected];
+    console.log(teams);
+    localStorage.setItem('teamSelectedStored', JSON.stringify(teams));
+}
+
+//==============================
+
 
 fetch(website_1_RequestURL)
     .then(function (response) {
@@ -37,23 +94,36 @@ fetch(website_1_RequestURL)
             optionEl.textContent = dataElement;
 
             // console.log(optionEl);
+            // var selectPlaceholder = document.createElement("option");
+            // selectPlaceholder.setAttribute("disabled", true);
+            // selectPlaceholder.setAttribute("selected", true);
+            // selectPlaceholder.setAttribute("hidden", true);
+            // selectPlaceholder.textContent = "Choose Team";
 
             // appending dropdown menu for team selection
+            // selectEl.append(selectPlaceholder);
             selectEl.append(optionEl);
         }
     });
-    
+
+
+
+
 
 function processTeamSelected() {
-    console.log("inside function processTeamSelected");
-    const storageTeamsRaw = localStorage.getItem("teamSelectedStored");
-    const storageTeams = JSON.parse(storageTeamsRaw);
-    teamSelected = $("#team-names option:selected").text();
-    const teams= storageTeams ? [...storageTeams, teamSelected] : [teamSelected];
-    console.log(teams);
-    localStorage.setItem('teamSelectedStored', JSON.stringify(teams));
+    storeTeams();
+    //replaced following with storeTeams above
+    // console.log("inside function processTeamSelected");
+    // const storageTeamsRaw = localStorage.getItem("teamSelectedStored");
+    // const storageTeams = JSON.parse(storageTeamsRaw);
+    // teamSelected = $("#team-names option:selected").text();
+    // const teams = storageTeams ? [...storageTeams, teamSelected] : [teamSelected];
+    // console.log(teams);
+    // localStorage.setItem('teamSelectedStored', JSON.stringify(teams));
     // console.log("teamSelected:", teamSelected);
-    
+
+    getStoredTeams();
+    renderTeams();
 
     fetch(website_2_RequestURL)
         .then(function (response) {
@@ -88,33 +158,74 @@ function displayTeamStats() {
     console.log("teamSelected", teamSelected);
     console.log("teamStats:");
     console.log(teamStats);
-    
+
     var teamPoints = teamStats.Points;
-    var footer = document.querySelector(".footer");
-    var stats = footer.querySelectorAll("p")
-    stats.forEach(function(stat){
-        stat.remove()
-        console.log(stat)
+    var stats = statListEl.querySelectorAll("p")
+
+    stats.forEach(function (stat) {
+        stat.remove();
+        console.log(stat);
     })
+
     var winsEl = document.createElement('p');
     winsEl.textContent = "Team's total wins: " + teamStats.Wins;
     console.log(winsEl);
-    footer.appendChild(winsEl);
+    statListEl.appendChild(winsEl);
 
     var winsEl = document.createElement('p');
     winsEl.textContent = "Team's total losses: " + teamStats.Losses;
     console.log(winsEl);
-    footer.appendChild(winsEl);
+    statListEl.appendChild(winsEl);
 
     var winsEl = document.createElement('p');
     winsEl.textContent = "Team's total points: " + teamStats.Points;
     console.log(winsEl);
-    footer.appendChild(winsEl);
+    statListEl.appendChild(winsEl);
 
 }
 
+function handleTeamClick(event) {
+    console.log(event.target);
+    console.log(event.target.parentElement.dataset.index);
+    var teamIndex = event.target.parentElement.dataset.index;
+    console.log(teamsSelected);
+    teamSelected = teamsSelected[teamIndex];
+    console.log(teamSelected);
+    // displayTeamStats();
 
+    fetch(website_2_RequestURL)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
 
+            // console.log(data);
+            // console.log("data section: ", data["data"]);
+            // console.log(data["data"]["length"]);
+            numTeams = data.length;
+            // console.log("numTeams ", numTeams);
+            // console.log(data);
+
+            for (i = 0; i < numTeams; i++) {
+                // console.log(data[i]["Name"]);
+                if (data[i]["Name"] === teamSelected) {
+                    teamStats = data[i];
+                    break;
+                }
+            }
+
+            // console.log(teamStats);
+
+            // calling function to handle display of team stats
+            displayTeamStats();
+
+        })
+
+}
+
+init();
 
 document.getElementById("team-names").addEventListener("change", processTeamSelected);
+teamListEl.addEventListener("click", handleTeamClick);
+
 
