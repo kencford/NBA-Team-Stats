@@ -27,11 +27,11 @@ function renderTeams() {
         //pEl.textContent = team;
         pEl.setAttribute("data-index", i);
 
-        var button = document.createElement("button");
-        button.textContent = team;
-        button.setAttribute("data-index", i);
+        // var button = document.createElement("button");
+        // button.textContent = team;
+        // button.setAttribute("data-index", i);
 
-        pEl.appendChild(button);
+        // pEl.appendChild(button);
         teamListEl.appendChild(pEl)
 
     }
