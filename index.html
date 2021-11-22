@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./assets/style.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./Assets/css/style.css" />
     <title>NBA Team Stats</title>
     <style>
         img{
@@ -78,7 +78,7 @@ img:hover{
                 <img src="https://c4.wallpaperflare.com/wallpaper/661/973/110/cool-nba-logo-wallpaper-preview.jpg"
                     width="80" height="58" alt="NBA logo">
             </a>
-            <h1 class="navbar button is-rounded is-info mr-4">
+            <h1 class="navbar button is is-rounded is-info mr-4">
                 Home
             </h1>
             <h1 class="navbar button is-rounded is-info mr-4">
@@ -120,10 +120,23 @@ img:hover{
         </section>
         </h1>
     </section>
-          <select name="" id="team-names">
-            <option value="" selected disabled>Choose Team</option>
-        </select>
-        </section>
+<section>
+    <div class="columns is-gapless is-multiline is-mobile">
+        <div class="column is-half">
+            <div id="team-list" ></div>
+                   <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2">
+                        <select name="" id="team-names">
+                            <option value="" selected disabled>Choose Team</option>
+                        </select>
+                      </button>
+        </div>
+        <div class="column is-half"> 
+            <div id="stat-list"> 
+
+            </div>
+    </div>
+</section>
+    
         <footer class="footer has-background-dark">
             <div class="content has-text-centered has-text-white">
                 <p>
@@ -153,11 +166,6 @@ img:hover{
                         .fa-instagram {
                             background: #125688;
                             color: white;
-                        }
-                        .fa-snapchat-ghost {
-                            background: #FFFC00;
-                            color: white;
-                            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
                         }
                     </style>
                     <a href="https://www.facebook.com/" class="fa fa-facebook"></a>

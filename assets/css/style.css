@@ -1,1 +1,9 @@
-
+.teamStatName {
+    font-weight:bold;
+}
+.teamStat {
+    padding-top: 15px;
+    min-width: min-content;
+    background-color: black;
+    text-decoration-color: white;
+}
